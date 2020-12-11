@@ -46,7 +46,7 @@ public class CommandsTest {
 
         // Checking for validity.
         if (driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/form[2]/input")).isEnabled()
-            || driver.findElement(By.id("message")).getText().equals("It's enabled!")){
+            && driver.findElement(By.id("message")).getText().equals("It's enabled!")){
             System.out.println("Check passed.");
         }
         else {
