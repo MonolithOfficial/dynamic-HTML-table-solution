@@ -56,7 +56,7 @@ public class CommandsTest {
         Thread.sleep(5000);
 
         // Checking for validity .
-        if (driver.findElement(By.cssSelector("#input-example > input:nth-child(1)")).isEnabled()
+        if (driver.findElement(By.cssSelector("#input-example > input")).isEnabled()
             && driver.findElement(By.id("message")).getText().equals("It's enabled!")){
             System.out.println("Check passed.");
         }
