@@ -61,7 +61,7 @@ public class CommandsTest {
         WebElement endEl = driver.findElement(By.name("twelve"));
         String initialBg = Helpers.checkBackground(startEl);
 
-        // Performing clickAndHold and release combination of actions with drag flag set to off.
+        // Performing clickAndHold and release combination of actions.
         Helpers.holdReleaseElements(driver, startEl, endEl);
         String changedBg = Helpers.checkBackground(startEl);
 
