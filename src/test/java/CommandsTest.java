@@ -85,14 +85,20 @@ public class CommandsTest {
         // Performing drag and release on the upper elements with drag flag set to on.
         // TIP: Here's an interesting case/supposed bug. Check out Helpers.java
         Helpers.holdReleaseElements(driver, elementA, elementB, true);
-        if (elementB.getLocation().x < elementA.getLocation().x){
+
+        // Checking for validity
+        if (elementA.getLocation().x < elementB.getLocation().x){
+            System.out.println(elementB.getLocation().x);
+            System.out.println(elementA.getLocation().x);
             System.out.println("Box A is to the right of Box B.");
         }
         else {
+            System.out.println(elementB.getLocation().x);
+            System.out.println(elementA.getLocation().x);
             System.out.println("Box B is not to the right of Box A.");
         }
 
-        // Closing the browser
+        // Closing the browser after 6 seconds from test finish.
         Helpers.tearDown(driver);
     }
 }
