@@ -32,7 +32,9 @@ public class CommandsTest {
         // I am using Robot because the context menu is NOT part of the HTML code,
         // It's a part of the browser, which Selenium supposedly has no control over.
         // NOTE: the browser has to be in the FOREGROUND while executing for Robot to work.
-        Robot robotObject = new Robot(); robotObject.keyPress(KeyEvent.VK_ESCAPE); robotObject.keyRelease(KeyEvent.VK_ESCAPE);
+        Robot robotObject = new Robot();
+        robotObject.keyPress(KeyEvent.VK_ESCAPE);
+        robotObject.keyRelease(KeyEvent.VK_ESCAPE);
 
         // Tip: see helper functions in test/java/Helpers.java
         Helpers.getURL(driver, "http://the-internet.herokuapp.com/dynamic_controls");
