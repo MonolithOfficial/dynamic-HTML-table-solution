@@ -41,7 +41,7 @@ public class CommandsTest {
 
         // Catching Enable button, clicking it and waiting until "It's enabled!" text is displayed and the
         // input is enabled.
-        driver.findElement(By.cssSelector("#input-example > button:nth-child(2)")).click();
+        driver.findElement(By.cssSelector("#input-example > button")).click();
 
         // If the task is about isDisplayed()
 //        if (driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/form[2]/input")).isEnabled()
