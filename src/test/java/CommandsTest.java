@@ -20,7 +20,7 @@ public class CommandsTest {
         driver.manage().window().maximize();
         Helpers.getURL(driver, "http://the-internet.herokuapp.com/context_menu");
 
-        // Capturing the main window and the element that's to be right-clicked, performing contextClick() on it,
+        // Capturing the element that's to be right-clicked, performing contextClick() on it,
         // Switching to alert and accepting it.
         WebElement ctx = driver.findElement(By.id("hot-spot"));
         Actions actionsObject = new Actions(driver);
@@ -33,9 +33,6 @@ public class CommandsTest {
         // It's a part of the browser, which Selenium supposedly has no control over.
         // NOTE: the browser has to be in the FOREGROUND while executing for Robot to work.
         Robot robotObject = new Robot(); robotObject.keyPress(KeyEvent.VK_ESCAPE); robotObject.keyRelease(KeyEvent.VK_ESCAPE);
-
-        // Closing the context menu
-        driver.findElement(By.xpath("/html/body/div[2]/div/div/h3")).click();
 
         // Tip: see helper functions in test/java/Helpers.java
         Helpers.getURL(driver, "http://the-internet.herokuapp.com/dynamic_controls");
