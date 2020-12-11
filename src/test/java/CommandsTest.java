@@ -37,7 +37,6 @@ public class CommandsTest {
         // Tip: see helper functions in test/java/Helpers.java
         Helpers.getURL(driver, "http://the-internet.herokuapp.com/dynamic_controls");
 
-
         // Catching Enable button, clicking it and waiting until "It's enabled!" text is displayed and the
         // input is enabled.
         driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/form[2]/button")).click();
@@ -61,7 +60,7 @@ public class CommandsTest {
         String initialBg = Helpers.checkBackground(startEl);
 
         // Performing clickAndHold and release combination of actions with drag flag set to off.
-        Helpers.holdReleaseElements(driver, startEl, endEl, false);
+        Helpers.holdReleaseElements(driver, startEl, endEl);
         String changedBg = Helpers.checkBackground(startEl);
 
         // Checking for validity.
@@ -79,20 +78,16 @@ public class CommandsTest {
         WebElement elementA = driver.findElement(By.id("column-a"));
         WebElement elementB = driver.findElement(By.id("column-b"));
 
-        // Performing drag and release on the upper elements with drag flag set to on.
-        // TIP: Here's an interesting case/supposed bug. Check out Helpers.java
-        Helpers.holdReleaseElements(driver, elementA, elementB, true);
-
         // Checking for validity
         if (elementA.getLocation().x < elementB.getLocation().x){
-            System.out.println(elementB.getLocation().x);
             System.out.println(elementA.getLocation().x);
-            System.out.println("Box A is to the right of Box B.");
+            System.out.println(elementB.getLocation().x);
+            System.out.println("Box B is positioned to the right of Box A");
         }
         else {
-            System.out.println(elementB.getLocation().x);
             System.out.println(elementA.getLocation().x);
-            System.out.println("Box B is not to the right of Box A.");
+            System.out.println(elementB.getLocation().x);
+            System.out.println("Box B is not positioned to the right of Box A.");
         }
 
         // Closing the browser after 6 seconds from test finish.
