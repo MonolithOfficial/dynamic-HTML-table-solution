@@ -40,6 +40,11 @@ public class WebElementsTest {
         // xpath that checks if there are any characters BEFORE 'manually', there may or may not be some. And if there are
         // any characters AFTER 'manually', there should be none.
         // Also, using i variable again, to get the last button.
+
+
+        // Here are two variants of Xpath to be used. One where it's not specified that where exactly the element is (* is used),
+        // and the other (in-action) where it is specified.
+        // //*[%s][string-length(substring-before(@class, 'manually')) >= 0 and string-length(substring-after(@class, 'manually')) = 0 and text()="Delete"]
         System.out.println(
                 driver.findElement(By.xpath(String.format("//div[@id=\"elements\"]//child::button[%s][string-length(substring-before(@class, 'manually')) >= 0 and string-length(substring-after(@class, 'manually')) = 0 and text()=\"Delete\"]",
                         String.valueOf(i)))).getText());
