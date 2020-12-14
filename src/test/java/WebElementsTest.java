@@ -27,25 +27,22 @@ public class WebElementsTest {
 
         // Using the i variable. It's the number of buttons we've spawned. So naturally, it's also the number of the
         // last 'Delete' button.
-        // Printing out an ELEMENT.
         System.out.println(
                 driver.findElement(By.cssSelector(String.format("div#elements button:nth-child(%s)",
-                        String.valueOf(i)))).getAttribute("outerHTML"));
+                        String.valueOf(i)))).getText());
 
         // Using findElements() method and storing WebElements into a list
         // The last item in the list has the index of (the_lists_length - 1).
-        // Printing out an ELEMENT.
         List<WebElement> elementList = driver.findElements(By.cssSelector("div#elements button[class^='added']"));
-        System.out.println(elementList.get(elementList.size() - 1).getAttribute("outerHTML"));
+        System.out.println(elementList.get(elementList.size() - 1).getText());
 
         // Apparently, ends-with() and matches(@att, regex) methods do not work. So what I did is write this humongous
         // xpath that checks if there are any characters BEFORE 'manually', there may or may not be some. And if there are
         // any characters AFTER 'manually', there should be none.
         // Also, using i variable again, to get the last button.
-        // Printing out an ELEMENT.
         System.out.println(
                 driver.findElement(By.xpath(String.format("//div[@id=\"elements\"]//child::button[%s][string-length(substring-before(@class, 'manually')) >= 0 and string-length(substring-after(@class, 'manually')) = 0 and text()=\"Delete\"]",
-                        String.valueOf(i)))).getAttribute("outerHTML"));
+                        String.valueOf(i)))).getText());
 
         driver.get("http://the-internet.herokuapp.com/challenging_dom");
 
@@ -55,10 +52,10 @@ public class WebElementsTest {
                         .getText());
 
 
-        // Printing out the ELEMENT that's next to the element with Ipsum value of 'Apeirian9'
+        // Printing out the text of the element that's next to the element with Ipsum value of 'Apeirian9'
         System.out.println(
                 driver.findElement(By.xpath("//div[@id=\"content\"]//following::td[text() = \"Apeirian9\"]//following::td[1]"))
-                        .getAttribute("outerHTML"));
+                        .getText());
 
         // Shutting down the browser.
         shutdown(driver);
