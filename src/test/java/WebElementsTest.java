@@ -17,7 +17,7 @@ public class WebElementsTest {
         driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
 
         // Locating the 'Add element' button.
-        WebElement addBtn = driver.findElement(By.xpath("//div[@Class='example']//child::button"));
+        WebElement addBtn = driver.findElement(By.xpath("//div[@Class='example']//child::button[text() = 'Add Element']"));
 
         // Clicking the button three times.
         int i;
