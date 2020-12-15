@@ -69,7 +69,7 @@ public class WebElementsTest {
         shutdown(driver);
     }
 
-    // A function that takes table header text and the text of an IPSUM element, finds the LOREM value
+    // A function that takes table header text and the text of e.g IPSUM element, finds the e.g LOREM value
     // Suppressed inlining lints
     private void locateCell(WebDriver driver, @SuppressWarnings("SameParameterValue") String thValue, @SuppressWarnings("SameParameterValue") String tdValue){
         // Determining the order number of the desired th inside thead
