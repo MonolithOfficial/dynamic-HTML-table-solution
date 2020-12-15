@@ -16,8 +16,8 @@ public class WebElementsTest {
 
         driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
 
-        // Locating the 'Add element' button.
-        WebElement addBtn = driver.findElement(By.xpath("//div[@Class='example']//child::button[text() = 'Add Element']"));
+        // Locating the 'Add element' button and making sure it actually can add an element
+        WebElement addBtn = driver.findElement(By.xpath("//div[@Class='example']//child::button[text() = 'Add Element' and @onclick = 'addElement()']"));
 
         // Clicking the button three times.
         int i;
@@ -25,11 +25,9 @@ public class WebElementsTest {
             addBtn.click();
         }
 
-        // Using the i variable. It's the number of buttons we've spawned. So naturally, it's also the number of the
-        // last 'Delete' button.
+        // Using last-child
         System.out.println(
-                driver.findElement(By.cssSelector(String.format("div#elements button:nth-child(%s)",
-                        String.valueOf(i)))).getText());
+                driver.findElement(By.cssSelector("div#elements button:last-child")).getText());
 
         // Using findElements() method and storing WebElements into a list
         // The last item in the list has the index of (the_lists_length - 1).
