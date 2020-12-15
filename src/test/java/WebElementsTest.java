@@ -5,11 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
+import javax.xml.xpath.*;
 import java.util.List;
 
 public class WebElementsTest {
     @Test
-    public void executeTest() throws InterruptedException {
+    public void executeTest() throws InterruptedException, XPathExpressionException {
         // Driver path setup.
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
@@ -49,10 +50,13 @@ public class WebElementsTest {
 
         driver.get("http://the-internet.herokuapp.com/challenging_dom");
 
-        // Printing out the LOREM VALUE of an element which has 'Apeirian9' as it's Ipsum value.
-        System.out.println(
-                driver.findElement(By.xpath("//div[@id=\"content\"]//following::td[text() = \"Apeirian9\"]//preceding::td[1]"))
-                        .getText());
+        // A dynamic solution, see the function below
+        locateCell(driver, "Lorem", "Apeirian9");
+
+        // A non-dynamic solution
+//        System.out.println(
+//                driver.findElement(By.xpath("//div[@id=\"content\"]//following::td[text() = \"Apeirian9\"]//preceding::td[1]"))
+//                        .getText());
 
 
         // Printing out the text of the element that's next to the element with Ipsum value of 'Apeirian9'
@@ -62,6 +66,27 @@ public class WebElementsTest {
 
         // Shutting down the browser.
         shutdown(driver);
+    }
+
+    private void locateCell(WebDriver driver, String theadName, String tdValue){
+        List<WebElement> theads = driver.findElements(By.xpath("//div[@id=\"content\"]//following::th"));
+        int theadIndex = 0;
+        for (int j = 0; j < theads.size(); j++){
+            if (theads.get(j).getText().equals(theadName)){
+                theadIndex = j + 1;
+            }
+        }
+        List<WebElement> allTableRows = driver.findElements(By.xpath("//th[text() = 'Lorem']//ancestor::thead//following-sibling::tbody//child::tr"));
+        int rowIndex = 0;
+        for (int k = 0; k < allTableRows.size(); k++){
+            if (allTableRows.get(k).getAttribute("outerHTML").contains(tdValue)){
+                rowIndex = k + 2;
+                break;
+            }
+        }
+        System.out.println(
+                driver.findElement(By.xpath(String.format("//div[@id=\"content\"]//following::tr[%s]//child::td[%s]",
+                        String.valueOf(rowIndex), String.valueOf(theadIndex)))).getText());
     }
 
     private void shutdown(WebDriver driver) throws InterruptedException {
