@@ -50,7 +50,8 @@ public class WebElementsTest {
 
         driver.get("http://the-internet.herokuapp.com/challenging_dom");
 
-        // A dynamic solution, see the function below
+        // A dynamic solution, it works with other th and td values as well.
+        // Check out the function below starting on line 74.
         locateCell(driver, "Lorem", "Apeirian9");
 
         // A non-dynamic solution
@@ -68,22 +69,34 @@ public class WebElementsTest {
         shutdown(driver);
     }
 
-    private void locateCell(WebDriver driver, String theadName, String tdValue){
-        List<WebElement> theads = driver.findElements(By.xpath("//div[@id=\"content\"]//following::th"));
+    // A function that takes table header text and the text of an IPSUM element, finds the LOREM value
+    // Suppressed inlining lints
+    private void locateCell(WebDriver driver, @SuppressWarnings("SameParameterValue") String thValue, @SuppressWarnings("SameParameterValue") String tdValue){
+        // Determining the order number of the desired th inside thead
+        List<WebElement> thsInThead = driver.findElements(By.xpath("//div[@id=\"content\"]//following::th"));
         int theadIndex = 0;
-        for (int j = 0; j < theads.size(); j++){
-            if (theads.get(j).getText().equals(theadName)){
+        for (int j = 0; j < thsInThead.size(); j++){
+            if (thsInThead.get(j).getText().equals(thValue)){
+                // Catching the index for later usage
                 theadIndex = j + 1;
             }
         }
+
+        // Determining on which row the second argument of this function is, aka the IPSUM value
+        // This function also works for other arguments besides "Lorem" and "Apeirian9"
         List<WebElement> allTableRows = driver.findElements(By.xpath("//th[text() = 'Lorem']//ancestor::thead//following-sibling::tbody//child::tr"));
         int rowIndex = 0;
         for (int k = 0; k < allTableRows.size(); k++){
+
+            // If the second argument is discovered with the HTML markup
             if (allTableRows.get(k).getAttribute("outerHTML").contains(tdValue)){
+                // Catching the index for later usage
                 rowIndex = k + 2;
                 break;
             }
         }
+
+        // Printing out, using the indexes from the above in xpath
         System.out.println(
                 driver.findElement(By.xpath(String.format("//div[@id=\"content\"]//following::tr[%s]//child::td[%s]",
                         String.valueOf(rowIndex), String.valueOf(theadIndex)))).getText());
